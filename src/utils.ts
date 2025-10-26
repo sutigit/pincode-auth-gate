@@ -1,4 +1,4 @@
-export function createPincode(
+export function generatePincode(
   length: number = 6,
   alphanumeric: boolean = false
 ): string {
