@@ -70,13 +70,13 @@ function selectFromList(items: string[]): Promise<string> {
 
 console.log("pincode-auth-gate");
 const ans = await rl.question(
-  "Create new pincode or change code in existing app? (c/e): "
+  "Create new pincode or change code in existing app? (c = create/e = existing): "
 );
 config.action = ans.toLowerCase() === "e" ? "change" : "create";
 
 if (config.action === "create") {
   config.appName = await rl.question(
-    "Enter the app name for this new pincode: "
+    "Enter name of the app in which the pincode will be used in: "
   );
 } else {
   config.appName = await selectFromList(apps);
