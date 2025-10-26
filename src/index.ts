@@ -95,8 +95,6 @@ if (config.action === "create") {
     console.log("pincode created");
     console.log(`app: ${r.app_name}`);
     console.log(`pin: ${r.pincode}`);
-    console.log(`id: ${r.id}`);
-    console.log(`created: ${r.created_at}`);
     rl.close();
     process.exit(0);
   } catch (e) {
@@ -141,7 +139,6 @@ if (config.action === "create") {
     console.log("pincode updated");
     console.log(`app: ${r.app_name}`);
     console.log(`pin: ${r.pincode}`);
-    console.log(`id: ${r.id}`);
     console.log(`updated: ${r.updated_at}`);
     rl.close();
     process.exit(0);
