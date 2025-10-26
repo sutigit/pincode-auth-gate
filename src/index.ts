@@ -2,6 +2,7 @@
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import readline from "node:readline";
+import { getApps } from "./db.js";
 
 type Action = "create" | "change";
 interface Config {
@@ -10,7 +11,6 @@ interface Config {
 }
 
 const rl = createInterface({ input, output });
-const apps = ["alpha", "beta", "gamma"];
 const config: Config = { action: "create" };
 
 async function apiCall(cfg: Config): Promise<{ ok: boolean }> {
@@ -79,6 +79,21 @@ if (config.action === "create") {
     "Enter name of the app in which the pincode will be used in: "
   );
 } else {
+  let apps: string[] | undefined;
+  try {
+    apps = await getApps();
+  } catch (err) {
+    console.error("Error: failed to fetch app list.");
+    rl.close();
+    process.exit(1);
+  }
+
+  if (!apps || apps.length === 0) {
+    console.log("No apps found. Exiting.");
+    rl.close();
+    process.exit(0);
+  }
+
   config.appName = await selectFromList(apps);
 }
 
